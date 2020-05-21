@@ -1,14 +1,20 @@
 const requestURL = 'https://raw.githubusercontent.com/VladIsLaugh/json/master/data.json';
+const container = document.getElementsByClassName("features-wrap")[0]
 
-async function a(){
+document.getElementById("getMore").addEventListener("click", (e)=>{
+    e.preventDefault()
+    draw()
+})
+
+
+
+async function draw(){
 
     let response = await fetch(requestURL);
 
     if (response.ok) { 
        let json = await response.json();
-       json.forEach(el => {
-           console.log(el);
-           
+       json.forEach(el => {  
         createBlock(el)
        });
 
@@ -24,7 +30,7 @@ function generateImg(){
     return `<img src="images/feature-icon-0${id}.svg" alt="Feature ${id}">`
 }
 
-const container = document.getElementsByClassName("features-wrap")[0]
+
 
 function createBlock(el){
     var block = document.createElement("div");
@@ -40,11 +46,7 @@ function createBlock(el){
         <h4 class="feature-title mt-24">${el.title}</h4>
         <p class="text-sm mb-0">${el.description}</p>
     </div>`
-container.appendChild(block)
-}
+    container.appendChild(block)
 
-document.getElementById("getMore").addEventListener("click", (e)=>{
-    e.preventDefault()
-    a()
-})
+}
 
